@@ -6,6 +6,7 @@
     align-items: center;
     gap: 20px;
     padding: 20px 8vw;
+    margin-top: 20px;
     padding-top: 80px;
 }
 .footer-content{
@@ -32,4 +33,11 @@
 .footer-social-icons img{
     width: 40px;
     margin-right: 15px;
+}
+.footer hr{
+    width: 100%;
+    height: 2px;
+    margin: 20px 0;
+    background-color: gray;
+    border: none;
 }
