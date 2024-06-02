@@ -3,8 +3,9 @@ import "./FoodItem.css";
 import { assets } from "../../assets/assets";
 import { StoreContext } from "../../context/StoreContext";
 
-const FoodItem = (id, name, price, description, image) => {
+const FoodItem = ({ id, name, price, description, image }) => {
   const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
+ 
 
   return (
     <div className="food-item">
@@ -13,20 +14,24 @@ const FoodItem = (id, name, price, description, image) => {
         {!cartItems[id] ? (
           <img
             className="add"
-            onClick={() => addToCart()}
+            onClick={() => addToCart(id)}
+            // onClick={()=>setItemCount(prev=>prev+1)}
             src={assets.add_icon_white}
             alt=""
           />
         ) : (
           <div className="food-item-counter">
             <img
-              onClick={() => removeFromCart()}
+              onClick={() => removeFromCart(id)}
+              // onClick={()=>setItemCount(prev=>prev-1)}
               src={assets.remove_icon_red}
               alt=""
             />
             <p>{cartItems[id]}</p>
+            {/* <p>{itemCount}</p> */}
             <img
               onClick={() => addToCart(id)}
+              // onClick={()=>setItemCount(prev=>prev+1)}
               src={assets.add_icon_green}
               alt=""
             />

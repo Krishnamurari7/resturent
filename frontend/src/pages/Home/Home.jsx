@@ -6,12 +6,12 @@ import FoodDisplay from '../../components/FoodDisplay/FoodDisplay';
 
 const Home = () => {
 
-    const[Category, setCategory] = useState("All")
+    const[category, setCategory] = useState("All")
 
   return (
     <div>
        <Header />
-       <ExploreMenu Category={Category} setCategory={setCategory}/>
+       <ExploreMenu category={category} setCategory={setCategory}/>
        <FoodDisplay />
     </div>
   )
