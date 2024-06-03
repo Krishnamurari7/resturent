@@ -12,15 +12,17 @@ const FoodDisplay = ({category}) => {
       <div className="food-display-list">
         {food_list.map((item, index) => {
           // if(category==="All"||category===item.category){
+            // console.log(category);
             return (
-              <FoodItem
+              <>{ category==="All"||category===item.category ? <FoodItem
                 key={index}
-                id={index._id}
+                id={item._id}
                 name={item.name}
                 description={item.description}
                 price={item.price}
                 image={item.image}
-              />
+              />:""}
+              </>
             );
           // }
           

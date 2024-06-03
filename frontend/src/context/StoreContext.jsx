@@ -6,45 +6,42 @@ export const StoreContext = createContext(null);
 
 // Create context provider component
 const StoreContextProvider = (props) => {
+  const [cartItems, setCartItems] = useState([]);
+
+  const addToCart = (itemId) =>{
+      if(!cartItems[itemId]){
+          setCartItems((prev)=>({...prev,[itemId]:1}))
+      }
+      else{
+          setCartItems((prev)=>({...prev,[itemId]:prev[itemId]+1}))
+      }
+  }
 
 
-    const [cartItems,setCartItems] = useState({});
 
+  const removeFromCart = (itemId) => {
+    setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
+  };
 
-    const addToCart = (itemId) =>{
-        // console.log(itemId);
-        if(!cartItems[itemId]){
-            setCartItems((prev)=>({...prev,[itemId]:1}))
-        }
-        else{
-            setCartItems((prev)=>({...prev,[itemId]:prev[itemId]+1}))
-        }
-    }
+  useEffect(() => {
+    console.log(cartItems);
+  }, [cartItems]);
 
+  // Define context value
+  const contextValue = {
+    food_list,
+    cartItems,
+    setCartItems,
+    addToCart,
+    removeFromCart,
+  };
 
-    const removeFromCart = (itemId) => {
-        setCartItems((prev) =>({...prev,[itemId]:prev[itemId]-1}))
-    }
-
-    useEffect(()=>{
-        console.log(cartItems);
-    },[cartItems])
-
-    // Define context value
-    const contextValue = {
-        food_list,
-        cartItems,
-        setCartItems,
-        addToCart,
-        removeFromCart
-    };
-
-    // Return the provider with the context value
-    return (
-        <StoreContext.Provider value={contextValue}>
-            {props.children}
-        </StoreContext.Provider>
-    );
+  // Return the provider with the context value
+  return (
+    <StoreContext.Provider value={contextValue}>
+      {props.children}
+    </StoreContext.Provider>
+  );
 };
 
 export default StoreContextProvider; // Export context provider component
