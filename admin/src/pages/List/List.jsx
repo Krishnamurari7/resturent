@@ -1,22 +1,33 @@
 import React, { useEffect, useState } from 'react'
 import './List.css'
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import {toast} from 'react-toastify';
 
 const List = () => {
 
 
-  const url = "https://localhost:4000"
+  const url = "http://localhost:4000"
 
   const [list,setList] = useState([]);
 
   const fetchList = async () => {
     const response = await axios.get(`${url}/api/food/list`);
-    console.log(response.data);
-    if(response.data.success){
+    // console.log(response.data);
+    if (response.data.sucess){
       setList(response.data.data)
     }
     else{
+      toast.error("Error")
+    }
+  }
+
+  const removeFood = async(foodId) =>{
+    // console.log(foodId);
+    const response = await axios.post(`${url}/api/food/remove`,{id:foodId});
+    await fetchList();
+    if(response.data.sucess){
+      toast.success(response.data.message)
+    }else{
       toast.error("Error")
     }
   }
@@ -44,7 +55,7 @@ const List = () => {
                 <p>{item.name}</p>
                 <p>{item.category}</p>
                 <p>${item.price}</p>
-                <p className='cursor'>X</p>
+                <p onClick={() =>removeFood(item._id)} className='cursor'>X</p>
               </div>
             )
         })}
