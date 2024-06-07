@@ -19,11 +19,11 @@ const  loginUser = async (req,res) => {
         const isMatch = await bcrypt.compare(password,user.password);
 
         if (!isMatch) {
-            return res.json({success:false,message:"Invalid credentials"})
+            return res.json({success:false,message:"Wrong password"})
         }
 
         const token = createToken(user._id);
-        res.json({success:true,token})
+        res.json({sucess:true,token})
 
     } catch (error) {
         console.log(error);
@@ -44,11 +44,11 @@ const registerUser = async (req,res) => {
         const exists = await userModel.findOne({email});
         // console.log(userModel.findOne({email}));
          if (exists) {
-        return res.json({success:false,message:"User already exits"})
+        return res.json({sucess:false,message:"User already exits"})
          }
          //vallidating email formt & strong Password
          if(!validator.isEmail(email)){
-            return res.json({success:false,message:"Please valid email"})
+            return res.json({sucess:false,message:"Please valid email"})
          }
          if(password.length<8){
             return res.json({sucess:false,message:"Password must be at least 8 characters"})
