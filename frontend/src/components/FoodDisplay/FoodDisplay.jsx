@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import "./FoodDisplay.css";
 import { StoreContext } from "../../context/StoreContext";
 import FoodItem from "../FoodItem/FoodItem";
+import axios from "axios"
 
 const FoodDisplay = ({category}) => {
   const { food_list } = useContext(StoreContext);
@@ -14,7 +15,8 @@ const FoodDisplay = ({category}) => {
           // if(category==="All"||category===item.category){
             // console.log(category);
             return (
-              <>{ category==="All"||category===item.category ? <FoodItem
+              <>
+              { category==="All"||category===item.category ? <FoodItem
                 key={index}
                 id={item._id}
                 name={item.name}
